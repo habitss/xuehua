@@ -1,0 +1,530 @@
+// =====================================================================
+// 卓越管理平台 — 深色科技大屏风登录页样式
+// 仅用于 MiniLogin.vue（@import 进 scoped style），不影响注册/忘记密码/扫码子页
+// =====================================================================
+
+@ems-primary: #2563eb;
+@ems-primary-deep: #1e3a8a;
+@ems-cyan: #38bdf8;
+@ems-bg: #0a1929;
+@ems-bg-2: #0b1220;
+@ems-text: #e6edf3;
+@ems-text-sub: #a8b5c8;
+@ems-border: rgba(255, 255, 255, 0.12);
+@ems-card: rgba(255, 255, 255, 0.05);
+
+// ---------------- 主布局：左右分屏 ----------------
+.ems-login {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, @ems-bg 0%, @ems-bg-2 100%);
+  overflow: hidden;
+
+  // 全屏背景层：径向光晕 + 网格（撑满整个屏幕，左右统一）
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(56, 189, 248, 0.22), transparent 45%),
+      radial-gradient(circle at 12% 88%, rgba(37, 99, 235, 0.22), transparent 50%);
+    pointer-events: none;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
+    pointer-events: none;
+  }
+
+  // 左侧舞台
+  &__stage {
+    position: relative;
+    z-index: 2;
+    flex: 1 1 58%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 56px 64px;
+    overflow: hidden;
+    color: @ems-text;
+  }
+
+  .ems-stage-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  // 右侧登录面板
+  &__panel {
+    position: relative;
+    z-index: 3;
+    flex: 0 0 42%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  &__card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 36px 32px;
+    background: rgba(13, 24, 42, 0.72);
+    border: 1px solid @ems-border;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+// 右上角操作区（语言 / 日夜切换）：横向排列不重叠 + 强制亮色图标适配深色背景
+.ems-top-actions {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: @ems-text;
+  :deep(svg) {
+    color: @ems-text !important;
+    fill: currentColor !important;
+  }
+}
+
+// ---------------- 左侧舞台内容 ----------------
+.ems-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &__logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px -6px rgba(14, 165, 233, 0.6);
+  }
+
+  &__text h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: @ems-text;
+  }
+  &__text p {
+    margin: 4px 0 0;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: @ems-cyan;
+  }
+}
+
+.ems-viz {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  margin: 40px 0;
+
+  &__metric {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  &__label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: @ems-text-sub;
+  }
+  &__value {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  &__num {
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1;
+    font-family: 'DIN Alternate', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #fff 0%, @ems-cyan 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &__unit {
+    font-size: 16px;
+    color: @ems-text-sub;
+  }
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+    animation: emsBreath 1.8s infinite;
+  }
+
+  &__chart {
+    height: 96px;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    .ems-line-bg {
+      fill: url(#emsAreaGrad);
+      opacity: 0.5;
+    }
+    .ems-line {
+      fill: none;
+      stroke: @ems-cyan;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: emsDraw 3s ease forwards, emsFlow 6s linear 3s infinite;
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.5));
+    }
+  }
+
+  &__kpi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+}
+
+.ems-kpi {
+  padding: 14px 12px;
+  background: @ems-card;
+  border: 1px solid @ems-border;
+  border-radius: 10px;
+
+  &__val {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: @ems-text;
+    font-family: 'DIN Alternate', 'Helvetica Neue', sans-serif;
+    &--down {
+      color: #34d399;
+    }
+  }
+  &__label {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: @ems-text-sub;
+  }
+}
+
+.ems-grid-nodes {
+  height: 64px;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  .ems-node {
+    fill: @ems-cyan;
+    animation: emsBlink 2.4s infinite;
+  }
+  .ems-node-line {
+    stroke: rgba(56, 189, 248, 0.3);
+    stroke-width: 1;
+  }
+}
+
+.ems-footer {
+  p {
+    margin: 0;
+    color: @ems-text-sub;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  &__copy {
+    font-size: 11px !important;
+    opacity: 0.7;
+  }
+}
+
+// 能量粒子
+.ems-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  span {
+    position: absolute;
+    bottom: -20px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: @ems-cyan;
+    opacity: 0.5;
+    animation: emsRise linear infinite;
+  }
+}
+
+// ---------------- 移动端顶部 logo ----------------
+.ems-phone-logo {
+  display: none;
+  margin-bottom: 18px;
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+}
+
+// =====================================================================
+// 表单深色化（覆盖 home.less 里同名类的视觉效果，作用于本组件 DOM）
+// =====================================================================
+.aui-formBox {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.aui-formWell {
+  background: transparent;
+}
+
+// 登录方式 tab
+.aui-form-nav {
+  text-align: center;
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid @ems-border;
+  .aui-flex-box {
+    color: @ems-text-sub !important;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+    &:hover {
+      color: @ems-text !important;
+    }
+  }
+  .activeNav.on .aui-flex-box,
+  .activeNav.on {
+    color: @ems-cyan !important;
+  }
+}
+.activeNav.on::after,
+.activeNav::after {
+  background: @ems-cyan !important;
+}
+
+// 输入框（无边框纯底色 + 文字 label，focus 时主题色高亮）
+.aui-inputClear {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  margin: 12px 0;
+  padding: 2px 14px !important;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  &:focus-within {
+    border-color: @ems-primary !important;
+    background: rgba(37, 99, 235, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+  }
+  // 文字标签（账号 / 密码 / 验证码）
+  :deep(.ant-form-item-label) {
+    padding: 6px 0 2px;
+    line-height: 1.4;
+    > label {
+      color: @ems-text !important;
+      font-size: 15px;
+      font-weight: 500;
+      height: auto;
+      &::after {
+        display: none; // 去掉 antd label 默认冒号
+      }
+    }
+  }
+  :deep(.ant-form-item) {
+    margin-bottom: 6px;
+  }
+  :deep(.ant-input) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: @ems-text !important;
+    height: 38px;
+    &::placeholder {
+      color: rgba(166, 181, 200, 0.3) !important;
+      font-size: 12px;
+    }
+  }
+}
+
+// 验证码 / 获取验证码
+.aui-code {
+  img {
+    border-radius: 4px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+}
+// 验证码输入框与图片并排（覆盖 base.less 里 .aui-code 的绝对定位）
+.ems-code-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .aui-code {
+    position: static;
+    flex-shrink: 0;
+    width: auto;
+    cursor: pointer;
+    img {
+      display: block;
+      height: 34px;
+      width: auto;
+    }
+  }
+}
+.aui-get-code {
+  background: rgba(37, 99, 235, 0.15) !important;
+  color: @ems-cyan !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
+
+// 记住我 / 忘记密码
+.aui-choice {
+  color: @ems-text-sub !important;
+}
+.aui-forget a {
+  color: @ems-cyan !important;
+}
+
+// 登录按钮（品牌渐变）
+.aui-link-login {
+  width: 100% !important;
+  display: block !important;
+  height: 44px !important;
+  border: none !important;
+  background: linear-gradient(135deg, @ems-primary-deep 0%, @ems-primary 50%, #0ea5e9 100%) !important;
+  box-shadow: 0 8px 20px -8px rgba(37, 99, 235, 0.7);
+  font-size: 15px !important;
+  font-weight: 600;
+  letter-spacing: 2px;
+  &:hover {
+    opacity: 0.92;
+    box-shadow: 0 10px 24px -8px rgba(14, 165, 233, 0.8);
+  }
+}
+.aui-formButton .aui-linek-code {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: @ems-text !important;
+  border: 1px solid @ems-border !important;
+  &:hover {
+    color: @ems-cyan !important;
+    border-color: rgba(56, 189, 248, 0.5) !important;
+  }
+}
+
+// 其他登录方式分隔线
+.aui-third-text span {
+  background: transparent !important;
+  color: @ems-text-sub !important;
+}
+.aui-third-border::after {
+  border-top-color: @ems-border !important;
+}
+.aui-third-login a {
+  color: @ems-text-sub !important;
+  &:hover {
+    color: @ems-cyan !important;
+  }
+}
+
+// 部门下拉
+.JLoginSelectDept {
+  :deep(.ant-select-selection-placeholder) {
+    color: @ems-text-sub !important;
+  }
+}
+
+// ---------------- 动画 ----------------
+@keyframes emsBreath {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+@keyframes emsDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes emsFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+@keyframes emsBlink {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes emsRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.4);
+    opacity: 0;
+  }
+}
+
+// ---------------- 响应式 ----------------
+@media (max-width: 992px) {
+  .ems-login {
+    flex-direction: column;
+    &__stage {
+      display: none;
+    }
+    &__panel {
+      flex: 1 1 100%;
+      padding: 28px;
+    }
+  }
+  .ems-phone-logo {
+    display: block;
+  }
+}

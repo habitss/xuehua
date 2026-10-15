@@ -1,0 +1,17 @@
+# 允许执行 build scripts 的包白名单。
+# pnpm 10 读 onlyBuiltDependencies; pnpm 11 读 allowBuilds —— 两字段都列以保证通用。
+# 不批准则 install 结尾报 ERR_PNPM_IGNORED_BUILDS(非0), 会阻断 `pnpm build` 前的 deps 检查。
+onlyBuiltDependencies:
+  - '@logicflow/core'
+  - '@scarf/scarf'
+  - core-js
+  - esbuild
+  - less
+  - vue-demi
+allowBuilds:
+  '@logicflow/core': true
+  '@scarf/scarf': true
+  core-js: true
+  esbuild: true
+  less: true
+  vue-demi: true
