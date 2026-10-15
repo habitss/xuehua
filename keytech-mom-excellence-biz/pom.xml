@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jeecgframework.boot3</groupId>
+        <artifactId>keytech-module-mom-excellence</artifactId>
+        <version>3.0</version>
+    </parent>
+
+    <artifactId>keytech-mom-excellence-biz</artifactId>
+
+    <dependencies>
+        <!-- keytech 公共基座（BaseController/BaseService 等），ems-service install 的 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot3</groupId>
+            <artifactId>keytech-base-core</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jeecgframework.boot3</groupId>
+            <artifactId>keytech-mom-excellence-entity</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <!-- Hutool JSON 模块(base-core 只传 hutool-core/crypto,缺 json) -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-json</artifactId>
+            <version>5.8.25</version>
+        </dependency>
+        <!-- jeecg 系统模块(SysDepart/SysUser/ISysDepartService 等 org.jeecg.modules.system.*), calc 迁入; 来自 ems-service sibling 项目 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot3</groupId>
+            <artifactId>jeecg-system-biz</artifactId>
+            <version>3.9.2</version>
+        </dependency>
+    </dependencies>
+</project>

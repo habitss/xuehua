@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 继承 ems-service 的 jeecg-boot-parent（3.9.2，boot3 体系），已 install 到本地 .m2 -->
+    <parent>
+        <groupId>org.jeecgframework.boot3</groupId>
+        <artifactId>jeecg-boot-parent</artifactId>
+        <version>3.9.2</version>
+    </parent>
+
+    <artifactId>keytech-module-mom-excellence</artifactId>
+    <version>3.0</version>
+    <packaging>pom</packaging>
+    <name>keytech-module-mom-excellence ${project.version}</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>keytech-mom-excellence-entity</module>
+        <module>keytech-mom-excellence-biz</module>
+        <module>keytech-mom-excellence-start</module>
+    </modules>
+</project>

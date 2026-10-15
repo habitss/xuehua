@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keytech.mom.excellence.mdm.mapper.MdmDictMapper">
+
+    <select id="getDictAllOrByGroupCode" resultType="com.keytech.mom.excellence.module.mdm.entity.MdmDict">
+        select * from mes4_mdm_dict
+        <where>
+            del_flag = 0
+            <if test="groupCodes != null and groupCodes.size > 0">
+                and group_code IN
+                <foreach collection="groupCodes" item="code" index="index" open="(" close=")" separator=",">
+                    #{code}
+                </foreach>
+            </if>
+        </where>
+        order by group_code, sort
+    </select>
+
+</mapper>

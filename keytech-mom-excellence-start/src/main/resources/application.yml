@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: keytech-mom-excellence
+  main:
+    allow-circular-references: true
+  config:
+    import: optional:classpath:config/application-liteflow.yml
+  profiles:
+    active: dev

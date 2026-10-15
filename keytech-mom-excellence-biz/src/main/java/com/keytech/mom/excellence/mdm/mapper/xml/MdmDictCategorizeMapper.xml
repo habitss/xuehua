@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keytech.mom.excellence.mdm.mapper.MdmDictCategorizeMapper">
+
+    <!-- 【vue3专用】 -->
+    <select id="queryListByPid" parameterType="java.lang.Object" resultType="org.jeecg.common.system.vo.SelectTreeModel">
+        select
+        id as "key",
+        categorize_name as "title",
+        (case when has_child = '1' then 0 else 1 end) as isLeaf,
+        parent_id as parentId
+        from mes4_mdm_dict_categorize
+        where parent_id = #{pid} and del_flag = '0'
+        <if test="query != null">
+            <foreach collection="query.entrySet()" item="value" index="key">
+                and ${key} = #{value}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>
